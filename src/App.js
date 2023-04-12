@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import Header from "./components/Header";
+import Conteudo from "./components/Conteudo";
+import Footer from "./components/Footer";
+import { useState } from "react";
+import "./App.css";
 
 function App() {
+  let temaTela = "";
+  let imgTema = "";
+  const [tema, setTema] = useState("escuro");
+
+  if (tema === "claro") {
+    temaTela = "escuro";
+    imgTema = "/assets/sun.png";
+  } else {
+    temaTela = "claro";
+    imgTema = "/assets/moon.png";
+  }
+
+  const mudarTema = () => {
+    tema === "claro" ? setTema("escuro") : setTema("claro");
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header temaTela={temaTela} imgTema={imgTema} mudarTema={mudarTema} />
+      <Conteudo temaTela={temaTela} />
+      <Footer temaTela={temaTela} />
     </div>
   );
 }
